@@ -4,5 +4,5 @@ class Hatarido:
         self.date = date
         self.time = time
         self.place = place
-        self.desc = desc
+        self.desc = desc 
     

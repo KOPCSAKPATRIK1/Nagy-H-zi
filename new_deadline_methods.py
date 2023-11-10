@@ -53,7 +53,7 @@ def new_desc():
 def new_place(): 
     while True: 
         new_place = input("Add meg a helyszínt (0 kilép): ")
-        if new_place == '0':
+        if new_place == '0': 
             print("Kilépés...")
             return False
         elif new_place == "" or new_place.isspace():

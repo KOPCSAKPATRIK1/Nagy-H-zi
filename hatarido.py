@@ -79,7 +79,7 @@ def main(main_lista):
         else: 
             selected = edit_deadline_methods.select(deadlines_list)
 
-
+ 
     return
 
 main_lista = load_file()      

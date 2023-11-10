@@ -21,4 +21,4 @@ def select(deadlines_list: list[Hatarido]):
             except IndexError:
                 print("Nincs ilyen index az adott listában. Kérlek válassz újra.")
             except Exception as e:
-                print(f"Hiba történt: {e}")
+                print(f"Hiba történt: {e}") 
