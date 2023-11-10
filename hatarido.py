@@ -77,7 +77,48 @@ def main(main_lista):
         if selected == False:
             main(deadlines_list)
         else: 
-            selected = edit_deadline_methods.select(deadlines_list)
+            print(f"Kiválasztott elem: {selected.name}; {selected.date}; {selected.time}; {selected.place}; {selected.desc}")
+            while True:
+                print(f"{colored('Mit szeretnél változtatni? (0 kilép)', 'white', 'on_blue')}\n"
+                        "[1] Név\n"
+                        "[2] Dátum\n"
+                        "[3] Idő\n"
+                        "[4] Helyszín\n"
+                        "[5] Leírás\n")
+                choose = input(f"\n{colored('->', 'white', 'on_green')}")
+                if choose != '1' and choose != '2' and choose != '3' and choose != '4' and choose != '5' and choose != '0':
+                    print(f"{colored('Nincs ilyen opció!', 'white', 'on_red')}")
+                else:
+                    break
+            if choose == '0':
+                main(deadlines_list)
+            elif choose == '1':
+                input_name = new_deadline_methods.new_name()
+                if input_name == False:
+                    main(deadlines_list)
+                edit_deadline_methods.edit(selected, input_name, int(choose) - 1)
+            elif choose == '2':
+                input_date = new_deadline_methods.new_date()
+                if input_date == False:
+                    main(deadlines_list)
+                edit_deadline_methods.edit(selected, input_date, int(choose) - 1)
+            elif choose == '3':
+                input_time = new_deadline_methods.new_time()
+                if input_time == False:
+                    main(deadlines_list)
+                edit_deadline_methods.edit(selected, input_time, int(choose) - 1)
+            elif choose == '4':
+                input_place = new_deadline_methods.new_place()
+                if input_place == False:
+                    main(deadlines_list)
+                edit_deadline_methods.edit(selected, input_place, int(choose) - 1)
+            elif choose == '5':
+                input_desc = new_deadline_methods.new_desc()
+                if input_desc == False:
+                    main(deadlines_list)
+                edit_deadline_methods.edit(selected, input_desc, int(choose) - 1)
+        main(deadlines_list)    
+
 
  
     return
