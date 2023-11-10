@@ -35,12 +35,12 @@ def load_file():
     
 
 
-def main(main_lista):
+def main(main_lista: list[Hatarido]):
     deadlines_list = main_lista
     choose = menu()
     
     if choose == '9': #kilépés
-            with open('output.txt', 'w', encoding='utf-8') as file:
+            with open('hatarido.txt', 'w', encoding='utf-8') as file:
                 for deadline in deadlines_list:
                     file.write(f"{deadline.name}; {deadline.date}; {deadline.time}; {deadline.place}; {deadline.desc}\n")
             print(f"{colored('Viszlát!', 'blue', 'on_white')}")
@@ -119,7 +119,13 @@ def main(main_lista):
                 edit_deadline_methods.edit(selected, input_desc, int(choose) - 1)
         main(deadlines_list)    
 
-
+    if choose == '3':
+        selected = edit_deadline_methods.select(deadlines_list)
+        if selected == False:
+            main(deadlines_list)
+        deadlines_list.remove(selected)
+        print(colored('Sikeres törlés.', 'green', 'on_green'))
+        main(deadlines_list)
  
     return
 

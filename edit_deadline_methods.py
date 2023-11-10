@@ -7,7 +7,7 @@ def select(deadlines_list: list[Hatarido]):
             for index, deadline in enumerate(deadlines_list, start=1):
                 print(f"{index}. {deadline.name}; {deadline.date}; {deadline.time}")
             try:
-                print("Melyiket szeretnéd módosítani? (0 kilép): ")
+                print("Melyiket szeretnéd választani? (0 kilép): ")
                 choose = input(f"\n{colored('->', 'white', 'on_green')}")
                 choose = int(choose)
 
