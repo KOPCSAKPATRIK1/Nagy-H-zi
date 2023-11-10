@@ -28,13 +28,13 @@ def select(deadlines_list: list[Hatarido]):
 def edit(deadline: Hatarido, data, index):
     if index == 0:
         deadline.name = data
-    elif index == 0:
+    elif index == 1:
         deadline.date = data
-    elif index == 0:
+    elif index == 2:
         deadline.time = data
-    elif index == 0:
+    elif index == 3:
         deadline.place = data
-    elif index == 0:
+    elif index == 4:
         deadline.desc = data
     print('siker')
     return
