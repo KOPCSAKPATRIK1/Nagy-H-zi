@@ -1,4 +1,4 @@
-class Hatarido:
+class Deadline:
     def __init__(self, name, date, time, place, desc) -> None:
         self.name = name
         self.date = date

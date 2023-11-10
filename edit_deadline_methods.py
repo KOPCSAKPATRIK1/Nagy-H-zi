@@ -1,8 +1,7 @@
-from hatarido_class import Hatarido
-import new_deadline_methods
+from daedline import Deadline
 from termcolor import colored
 
-def select(deadlines_list: list[Hatarido]):
+def select(deadlines_list: list[Deadline]):
     while True:
             for index, deadline in enumerate(deadlines_list, start=1):
                 print(f"{index}. {deadline.name}; {deadline.date}; {deadline.time}")
@@ -25,7 +24,7 @@ def select(deadlines_list: list[Hatarido]):
             except Exception as e:
                 print(f"Hiba történt: {e}") 
 
-def edit(deadline: Hatarido, data, index):
+def edit(deadline: Deadline, data, index):
     if index == 0:
         deadline.name = data
     elif index == 1:
@@ -39,4 +38,4 @@ def edit(deadline: Hatarido, data, index):
     print('siker')
     return
 
-    
+

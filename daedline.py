@@ -1,6 +1,7 @@
 from termcolor import colored
 from datetime import datetime 
-from hatarido_class import Hatarido
+from deadline_class import Deadline
+import search_deadline_methods
 import new_deadline_methods
 import edit_deadline_methods
 
@@ -21,10 +22,10 @@ def menu():
     
 def load_file():
     deadline_txt = open('hataridok.txt', 'rt', encoding='utf-8')
-    adat = deadline_txt.read()
-    adat_lista = adat.split("\n")
+    data = deadline_txt.read()
+    data_list = data.split("\n")
     try:
-       deadlines_list = [Hatarido(*deadline.split('; ')) for deadline in adat_lista]
+       deadlines_list = [Deadline(*deadline.split('; ')) for deadline in data_list]
        deadline_txt.close()
        return deadlines_list
     except Exception as e:
@@ -35,8 +36,8 @@ def load_file():
     
 
 
-def main(main_lista: list[Hatarido]):
-    deadlines_list = main_lista
+def main(main_list: list[Deadline]):
+    deadlines_list = main_list
     choose = menu()
     
     if choose == '9': #kilépés
@@ -62,7 +63,7 @@ def main(main_lista: list[Hatarido]):
         input_desc = new_deadline_methods.new_desc()
         if input_desc == False:
             main(deadlines_list)
-        deadlines_list.append(Hatarido(
+        deadlines_list.append(Deadline(
             input_name,
             input_date,
             input_time,
@@ -127,6 +128,15 @@ def main(main_lista: list[Hatarido]):
         print(colored('Sikeres törlés.', 'green', 'on_green'))
         main(deadlines_list)
  
+    if choose == '5':
+        result = search_deadline_methods.search_by_name(deadlines_list)
+        if result:
+            for item in result:
+                print(f"Találat: {item.name}; {item.date}; {item.time}; {item.place}; {item.desc}")
+        else:
+            print("Nincs találat.")
+        input('Kilépéshez adj meg egy bemenetet.')
+        main(deadlines_list)
     return
 
 main_lista = load_file()      
