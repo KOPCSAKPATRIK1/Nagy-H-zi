@@ -20,7 +20,7 @@ def menu():
         else:
             return choose
     
-def load_file():
+def load_file(): #fajl beolvasas
     deadline_txt = open('hataridok.txt', 'rt', encoding='utf-8')
     data = deadline_txt.read()
     data_list = data.split("\n")
@@ -33,8 +33,6 @@ def load_file():
         deadlines_list = []
         deadline_txt.close()
         return deadlines_list
-    
-
 
 def main(main_list: list[Deadline]):
     deadlines_list = main_list
@@ -120,7 +118,7 @@ def main(main_list: list[Deadline]):
                 edit_deadline_methods.edit(selected, input_desc, int(choose) - 1)
         main(deadlines_list)    
 
-    if choose == '3':
+    if choose == '3': #törlés
         selected = edit_deadline_methods.select(deadlines_list)
         if selected == False:
             main(deadlines_list)
@@ -128,7 +126,7 @@ def main(main_list: list[Deadline]):
         print(colored('Sikeres törlés.', 'green', 'on_green'))
         main(deadlines_list)
  
-    if choose == '5':
+    if choose == '5': #keresés
         result = search_deadline_methods.search_by_name(deadlines_list)
         if result:
             for item in result:
