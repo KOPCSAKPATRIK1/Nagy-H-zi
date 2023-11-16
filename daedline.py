@@ -39,7 +39,7 @@ def main(main_list: list[Deadline]):
     choose = menu()
     
     if choose == '9': #kilépés
-            with open('hatarido.txt', 'w', encoding='utf-8') as file:
+            with open('hataridok.txt', 'w', encoding='utf-8') as file:
                 for deadline in deadlines_list:
                     file.write(f"{deadline.name}; {deadline.date}; {deadline.time}; {deadline.place}; {deadline.desc}\n")
             print(f"{colored('Viszlát!', 'blue', 'on_white')}")
