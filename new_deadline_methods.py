@@ -19,7 +19,8 @@ def new_date():
                     return False
                 else:
                     date_object = datetime.strptime(new_date, "%Y.%m.%d")
-                    return date_object.date()                
+                    formatted_date = date_object.strftime("%Y.%m.%d")
+                    return str(formatted_date)
             except ValueError:
                 print(f"{colored('Hibás formátum. Próbáld újra.', 'white', 'on_red')}")
            
@@ -32,7 +33,7 @@ def new_time():
                     return False
                else:
                     time_object = datetime.strptime(new_time, '%H:%M')
-                    return time_object.time()
+                    return str(time_object.time())
           except ValueError:
                print(f"{colored('Hibás formátum. Próbáld újra.', 'white', 'on_red')}")
 

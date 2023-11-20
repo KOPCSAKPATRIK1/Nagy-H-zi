@@ -21,13 +21,12 @@ def menu():
             return choose
     
 def load_file(): #fajl beolvasas
-    deadline_txt = open('hataridok.txt', 'rt', encoding='utf-8')
-    data = deadline_txt.read()
-    data_list = data.split("\n")
     try:
-       deadlines_list = [Deadline(*deadline.split('; ')) for deadline in data_list]
-       deadline_txt.close()
-       return deadlines_list
+        with open('hataridok.txt', 'rt', encoding='utf-8') as deadline_txt:
+            data = deadline_txt.read()
+            data_list = data.split("\n")
+            deadlines_list = [Deadline(*deadline.split('; ')) for deadline in data_list if deadline.strip()]
+            return deadlines_list
     except Exception as e:
         print(f'A fájl beolvasása során hiba történt: {e}')
         deadlines_list = []
@@ -72,7 +71,11 @@ def main(main_list: list[Deadline]):
         main(deadlines_list)
 
     if choose == '2': #módosítás
-        selected = edit_deadline_methods.select(deadlines_list)
+        try:
+            selected = edit_deadline_methods.select(deadlines_list)
+        except:
+            print(colored('Jelenleg nincs elmentve egy rekord se', 'white', 'on_red'))
+            main(deadlines_list)
         if selected == False:
             main(deadlines_list)
         else: 
@@ -83,10 +86,10 @@ def main(main_list: list[Deadline]):
                         "[2] Dátum\n"
                         "[3] Idő\n"
                         "[4] Helyszín\n"
-                        "[5] Leírás\n")
+                        "[5] Leírás")
                 choose = input(f"\n{colored('->', 'white', 'on_green')}")
                 if choose != '1' and choose != '2' and choose != '3' and choose != '4' and choose != '5' and choose != '0':
-                    print(f"{colored('Nincs ilyen opció!', 'white', 'on_red')}")
+                    print(colored('Érvénytelen választás. Kérlek válassz újra.', 'white', 'on_red'))
                 else:
                     break
             if choose == '0':
@@ -116,7 +119,6 @@ def main(main_list: list[Deadline]):
                 if input_desc == False:
                     main(deadlines_list)
                 edit_deadline_methods.edit(selected, input_desc, int(choose) - 1)
-        main(deadlines_list)    
 
     if choose == '3': #törlés
         selected = edit_deadline_methods.select(deadlines_list)
@@ -126,6 +128,22 @@ def main(main_list: list[Deadline]):
         print(colored('Sikeres törlés.', 'green', 'on_green'))
         main(deadlines_list)
  
+    if choose == '4': #naptár szerinti listázás
+        while True:
+                print(f"{colored('Mit szeretnél változtatni? (0 kilép)', 'white', 'on_blue')}\n"
+                        "[1] Nap\n"
+                        "[2] Hét\n"
+                        "[3] Hónap\n"
+                        "[4] Összes\n")
+                choose = input(f"\n{colored('->', 'white', 'on_green')}")
+                if choose != '1' and choose != '2' and choose != '3' and choose != '4' and choose != '0':
+                    print(colored('Érvénytelen választás. Kérlek válassz újra.', 'white', 'on_red'))
+                else:
+                    break
+        if choose == '0':
+                main(deadlines_list)
+        pass
+
     if choose == '5': #keresés
         result = search_deadline_methods.search_by_name(deadlines_list)
         if result:
