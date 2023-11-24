@@ -9,18 +9,18 @@ def new_name():
         elif new_name == "" or new_name.isspace():
             print(f"{colored('Hibás formátum. Próbáld újra.', 'white', 'on_red')}")
         else:
-             return new_name
+            return new_name
 
 def new_date():
     while True:
             try:
-                new_date = input("Add meg a dátumot (YYYY.MM.DD formátumban) (0 kilép): ")
+                new_date = input("Add meg a dátumot (YYYY-MM-DD formátumban) (0 kilép): ")
                 if new_date == '0':
                     return False
                 else:
-                    date_object = datetime.strptime(new_date, "%Y.%m.%d")
-                    formatted_date = date_object.strftime("%Y.%m.%d")
-                    return str(formatted_date)
+                    date_object = datetime.strptime(new_date, "%Y-%m-%d")
+                    formatted_date = date_object.strftime("%Y-%m-%d")
+                    return formatted_date
             except ValueError:
                 print(f"{colored('Hibás formátum. Próbáld újra.', 'white', 'on_red')}")
            
@@ -33,7 +33,8 @@ def new_time():
                     return False
                else:
                     time_object = datetime.strptime(new_time, '%H:%M')
-                    return str(time_object.time())
+                    formatted_time = time_object.strftime('%H:%M')
+                    return formatted_time
           except ValueError:
                print(f"{colored('Hibás formátum. Próbáld újra.', 'white', 'on_red')}")
 

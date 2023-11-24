@@ -4,6 +4,7 @@ from deadline_class import Deadline
 import search_deadline_methods
 import new_deadline_methods
 import edit_deadline_methods
+import display_deadline_methods
 
 def menu():
     while True:
@@ -58,7 +59,7 @@ def main(main_list: list[Deadline]):
         if input_place == False:
             main(deadlines_list)
         input_desc = new_deadline_methods.new_desc()
-        if input_desc == False:
+        if input_desc == False: 
             main(deadlines_list)
         deadlines_list.append(Deadline(
             input_name,
@@ -73,7 +74,8 @@ def main(main_list: list[Deadline]):
     if choose == '2': #módosítás
         try:
             selected = edit_deadline_methods.select(deadlines_list)
-        except:
+        except Exception as e:
+            print(e)
             print(colored('Jelenleg nincs elmentve egy rekord se', 'white', 'on_red'))
             main(deadlines_list)
         if selected == False:
@@ -121,7 +123,11 @@ def main(main_list: list[Deadline]):
                 edit_deadline_methods.edit(selected, input_desc, int(choose) - 1)
 
     if choose == '3': #törlés
-        selected = edit_deadline_methods.select(deadlines_list)
+        try:
+            selected = edit_deadline_methods.select(deadlines_list)
+        except:
+            print(colored('Jelenleg nincs elmentve egy rekord se', 'white', 'on_red'))
+            main(deadlines_list)
         if selected == False:
             main(deadlines_list)
         deadlines_list.remove(selected)
@@ -130,7 +136,7 @@ def main(main_list: list[Deadline]):
  
     if choose == '4': #naptár szerinti listázás
         while True:
-                print(f"{colored('Mit szeretnél változtatni? (0 kilép)', 'white', 'on_blue')}\n"
+                print(f"{colored('Mit szeretnél választani? (0 kilép)', 'white', 'on_blue')}\n"
                         "[1] Nap\n"
                         "[2] Hét\n"
                         "[3] Hónap\n"
@@ -138,11 +144,16 @@ def main(main_list: list[Deadline]):
                 choose = input(f"\n{colored('->', 'white', 'on_green')}")
                 if choose != '1' and choose != '2' and choose != '3' and choose != '4' and choose != '0':
                     print(colored('Érvénytelen választás. Kérlek válassz újra.', 'white', 'on_red'))
-                else:
-                    break
-        if choose == '0':
-                main(deadlines_list)
-        pass
+                if choose == '1':
+                    display_deadline_methods.display_today(deadlines_list)
+                if choose == '2':
+                    display_deadline_methods.display_this_week(deadlines_list)
+                if choose == '3':
+                    display_deadline_methods.display_remaining_month(deadlines_list)
+                if choose == '4':
+                    display_deadline_methods.display_deadlines(deadlines_list)
+                if choose == '0':
+                        main(deadlines_list)
 
     if choose == '5': #keresés
         result = search_deadline_methods.search_by_name(deadlines_list)
