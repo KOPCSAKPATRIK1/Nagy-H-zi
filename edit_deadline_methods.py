@@ -3,6 +3,19 @@ from termcolor import colored
 import display_deadline_methods
 
 def select(deadlines_list: list[Deadline]):
+    """
+    Kiválaszt egy határidőt a megadott listából vagy lehetőséget ad a kilépésre.
+
+    Args:
+        deadlines_list (List[Deadline]): Egy Deadline objektumokat tartalmazó lista.
+
+    Returns:
+        Union[Deadline, bool]: A kiválasztott határidő objektum, ha a felhasználó választott,
+        vagy False, ha a felhasználó kilépett.
+
+    Usage:
+        A felhasználó a határidők listájából választhat egyet, vagy kiléphet az 0-val.
+    """
     while True:
             display_deadline_methods.display_deadlines(deadlines_list)
             try:
@@ -22,6 +35,21 @@ def select(deadlines_list: list[Deadline]):
                 print(colored('Érvénytelen bemenet. Kérlek válassz újra.', 'white', 'on_red'))
 
 def edit(deadline: Deadline, data, index):
+    """
+    Módosítja a megadott határidő objektum attribútumait az index alapján a kapott adatokkal.
+
+    Args:
+        deadline (Deadline): A módosítandó határidő objektum.
+        data: Az új adat, amivel frissíteni szeretnénk az adott attribútumot.
+        index (int): Az attribútumot jelölő index. 
+            0: név, 1: dátum, 2: idő, 3: hely, 4: leírás.
+
+    Returns:
+        None
+
+    Usage:
+        A függvény segítségével lehet egy adott határidő objektum attribútumait módosítani.
+    """
     if index == 0:
         deadline.name = data
     elif index == 1:
